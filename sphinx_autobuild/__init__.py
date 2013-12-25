@@ -38,7 +38,6 @@ class _WatchdogHandler(FileSystemEventHandler):
 class LivereloadWatchdogWatcher(object):
 
     def __init__(self):
-        super(LivereloadWatchdogWatcher, self).__init__()
         self._changed = False
         self._action_file = None  # TODO: Hack
         self._observer = Observer()
