@@ -8,13 +8,7 @@ detected. Also includes a livereload enabled web server.
 Installation
 ------------
 
-``sphinx-autobuild`` relies on a not-yet-released version of
-``python-livereload``. You can install it through pip by issuing the following
-command::
-
-    pip install https://github.com/lepture/python-livereload/archive/master.zip
-
-You can then use pip to install the package::
+You can use ``pip`` to install the package along with its requirements::
 
     pip install sphinx-autobuild
 
@@ -46,4 +40,8 @@ add the following target::
 
     livehtml:
     	sphinx-autobuild -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+
+Then run with::
+
+    make livehtml
 
