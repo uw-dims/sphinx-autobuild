@@ -136,6 +136,10 @@ SPHINX_BUILD_OPTIONS = (
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', type=int, default=8000)
+    parser.add_argument('-z', '--watch', action='append', metavar='DIR',
+                        help=('Specify additional directories to watch. May be'
+                              ' used multiple times.'),
+                        dest='watched_dirs')
 
     for opt, meta in SPHINX_BUILD_OPTIONS:
         if meta is None:
@@ -182,7 +186,12 @@ def main():
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
+    builder = SphinxBuilder(outdir, build_args, ignored)
+
     server = Server(watcher=LivereloadWatchdogWatcher())
-    server.watch(srcdir, SphinxBuilder(outdir, build_args, ignored))
+    server.watch(srcdir, builder)
+    for dirpath in args.watched_dirs:
+        dirpath = os.path.realpath(dirpath)
+        server.watch(dirpath, builder)
     server.watch(outdir)
     server.serve(port=args.port, root=outdir)
