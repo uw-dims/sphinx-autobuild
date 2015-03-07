@@ -269,4 +269,4 @@ def main():
         server.watch(dirpath, builder)
     server.watch(outdir)
 
-    server.serve(port=args.port, host=args.host, root=outdir)
+    server.serve(port=portn, host=args.host, root=outdir)
