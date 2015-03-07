@@ -11,6 +11,7 @@ import fnmatch
 import os
 import subprocess
 import sys
+import port_for
 
 try:
     import pty
@@ -23,7 +24,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
-__version__ = '0.5.0'
+__version__ = '0.5.0+dims'
 __url__ = 'https://github.com/GaretJax/sphinx-autobuild'
 
 
@@ -253,6 +254,11 @@ def main():
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)
+
+    if args.port != 0:
+        portn = args.port
+    else:
+        portn = port_for.select_random()
 
     builder = SphinxBuilder(outdir, build_args, ignored)
     server = Server(watcher=LivereloadWatchdogWatcher())
