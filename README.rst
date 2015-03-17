@@ -32,7 +32,7 @@ The package installs a single executable script, named ``sphinx-autobuild``.
 The script takes the same arguments as the ``sphinx-build`` command installed
 by Sphinx plus the following options:
 
-* ``-p``/``--port`` option to specify the port on which the documentation shall be served (default 8000)
+* ``-p``/``--port`` option to specify the port on which the documentation shall be served (default 0)
 * ``-H``/``--host`` option to specify the host on which the documentation shall be served (default 127.0.0.1)
 * ``-i``/``--ignore`` multiple allowed, option to specify file ignore glob expression when watching changes, for example: `*.tmp`
 * ``-z``/``--watch`` multiple allowed, option to specify additional directories
@@ -40,11 +40,20 @@ by Sphinx plus the following options:
 
 To build a classical Sphinx documentation set, issue the following command::
 
-    sphinx-autobuild docs docs/_build/html
+    $ sphinx-autobuild docs docs/_build/html
+    Serving on http://127.0.0.1:16458
 
-And then visit the webpage served at http://127.0.0.1:8000. Each time a change
-to the documentation source is detected, the HTML is rebuilt and the browser
-automatically reloaded.
+
+And then visit the webpage served at the URL shown (in this case, port 16458
+was randomly chosen). Each time a change to the documentation source is
+detected, the HTML is rebuilt and the browser automatically reloaded.
+
+If you want to force the listening port to be a specific port (e.g., 8000), use::
+
+    $ sphinx-autobuild -p 8000 docs docs/_build/html
+    Serving on http://127.0.0.1:8000
+
+You can now visit the webpage served at http://127.0.0.1:8000 instead.
 
 To stop the server simply press ``^C``.
 
@@ -60,5 +69,6 @@ add the following target::
 
 Then run with::
 
-    make livehtml
+    $ make livehtml
+    Serving on http://127.0.0.1:17401
 

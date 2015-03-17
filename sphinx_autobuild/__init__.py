@@ -201,7 +201,7 @@ SPHINX_BUILD_OPTIONS = (
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port', type=int, default=8000)
+    parser.add_argument('-p', '--port', type=int, default=0)
     parser.add_argument('-H', '--host', type=str, default='127.0.0.1')
     parser.add_argument('-i', '--ignore', action='append', default=[])
     parser.add_argument('-z', '--watch', action='append', metavar='DIR',
